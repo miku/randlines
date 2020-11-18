@@ -1,6 +1,8 @@
 # randlines
 
-Print out random number of lines from a line oriented file.
+Print out random number of lines from a line oriented file. Pick up where
+[shuf](https://www.gnu.org/software/coreutils/manual/html_node/shuf-invocation.html)
+gets killed.
 
 ```shell
 $ randlines
