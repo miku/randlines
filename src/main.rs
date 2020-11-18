@@ -5,7 +5,8 @@ extern crate rand;
 use rand::Rng;
 use std::env;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io;
+use std::io::{BufRead, Write};
 
 fn main() {
     let usage = "usage: randlines -n NUM FILE
@@ -13,13 +14,9 @@ fn main() {
 Emit a random subset of lines from a file. This is a probabilistic
 program, you will not get exactly `n` lines, but about `n` lines.
 
-🈹 Typically, you can use shuf(1) which uses reservoir sampling and
+Typically, you can use shuf(1) which uses reservoir sampling and
 is very efficient. However, if we want to extract 10M random lines
-from a file of 100M lines, shuf(1) might be killed.
-
-EXAMPLE
-
-    randlines -n 1000 my.file";
+from a file of 100M lines, shuf(1) might be killed.";
 
     let args: Vec<String> = env::args().collect();
     if args.len() < 4 || args[1] != "-n" {
@@ -32,7 +29,7 @@ EXAMPLE
         n = args[2].parse::<u64>().unwrap();
     }
     let f = File::open(&args[3]).expect("unable to open file");
-    let f = BufReader::new(f);
+    let f = io::BufReader::new(f);
     for _ in f.lines() {
         i = i + 1;
     }
@@ -41,12 +38,15 @@ EXAMPLE
     }
     let p: f64 = n as f64 / i as f64;
     let f = File::open(&args[3]).expect("unable to open file");
-    let f = BufReader::new(f);
+    let f = io::BufReader::new(f);
+    let stdout = io::stdout();
+    let lock = stdout.lock();
+    let mut w = io::BufWriter::new(lock);
     let mut rng = rand::thread_rng();
     for line in f.lines() {
         let line = line.expect("unable to read line");
         if rng.gen::<f64>() < p {
-            println!("{}\n", line);
+            writeln!(w, "{}", line).expect("failed to write line");
         }
     }
 }
