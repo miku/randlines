@@ -1,5 +1,7 @@
 # randlines
 
+WIP: currently broken.
+
 [![crates.io](https://img.shields.io/crates/v/randlines.svg)](https://crates.io/crates/randlines)
 
 Print out random number of lines from a line oriented file. Pick up where
