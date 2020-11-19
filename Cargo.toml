@@ -1,6 +1,6 @@
 [package]
 name = "randlines"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Martin Czygan <martin.czygan@gmail.com>"]
 edition = "2018"
 description = "Similar to shuf(1), but probabilistic and minimalistic with respect to memory"
