@@ -52,3 +52,4 @@ skip over random number of lines.
 ## TODO
 
 * [ ] compress temporary output when reading from stdin
+* [ ] make --size-hint actually work
