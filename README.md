@@ -49,3 +49,6 @@ efficient. However, if we want to extract 10M random lines from a file of 100M
 lines, shuf(1) might be killed. However, randlines will not shuffle lines, just
 skip over random number of lines.
 
+## TODO
+
+* [ ] compress temporary output when reading from stdin
