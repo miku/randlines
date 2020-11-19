@@ -44,8 +44,8 @@ fn main() {
         filename = file.path().to_str();
     }
     let i = match opt.size_hint {
+        Some(v) => v,
         None => {
-            println!("xxx");
             let reader: Box<dyn BufRead> = match opt.input {
                 None => Box::new(BufReader::new(File::open(filename.unwrap()).unwrap())),
                 Some(ref f) => Box::new(BufReader::new(File::open(f).unwrap())),
@@ -56,7 +56,6 @@ fn main() {
             }
             j
         }
-        Some(v) => v,
     };
     if i == 0 {
         std::process::exit(0);
