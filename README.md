@@ -15,8 +15,30 @@ $ cargo install randlines
 ## Usage
 
 ```shell
-$ randlines
-usage: randlines -n NUM FILE
+$ randlines -h
+randlines 0.1.1
+
+Emit a random subset of lines from a file. This is a probabilistic program, you
+will not get exactly `n` lines.
+
+Typically, you can use shuf(1) which uses reservoir sampling and is very
+efficient. However, if we want to extract 10M random lines from a file of 100M
+lines, shuf(1) might be killed. However, randlines will not shuffle lines, just
+skip over random number of lines.
+
+USAGE:
+    randlines [OPTIONS] [input]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -n <n>                          [default: 16]
+    -s, --size-hint <size-hint>
+
+ARGS:
+    <input>
 ```
 
 Emit a random subset of lines from a file. This is a probabilistic program, you
@@ -27,6 +49,3 @@ efficient. However, if we want to extract 10M random lines from a file of 100M
 lines, shuf(1) might be killed. However, randlines will not shuffle lines, just
 skip over random number of lines.
 
-## TODO
-
-Currently, we need a filename, but we should be able to read from stdin as well.
