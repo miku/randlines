@@ -52,7 +52,7 @@ fn main() {
             };
             let mut j = 0;
             for _ in reader.lines() {
-                j = j + 1;
+                j += 1;
             }
             j
         }
